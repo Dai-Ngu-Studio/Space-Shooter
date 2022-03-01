@@ -32,6 +32,6 @@ public class UIManager : MonoBehaviour
     public void HideTitleScreen()
     {
         titleScreen.SetActive(false);
-        scoreText.text = "Scrore:";
+        scoreText.text = "Score: ";
     }
 }
