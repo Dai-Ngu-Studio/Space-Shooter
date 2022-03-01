@@ -80,7 +80,7 @@ Material:
     - _StepSize: 230
     - _Tile: 740
     - _UVSec: 0
-    - _Volsteps: 15
+    - _Volsteps: 8
     - _ZWrite: 1
     - _Zoom: 800
     m_Colors:
