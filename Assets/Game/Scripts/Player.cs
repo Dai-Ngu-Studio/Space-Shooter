@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
 
     private float _canFire = 0.0f;
 
+    public bool isPauseGame = false;
+
     private AudioSource _audioSource;
 
     // Start is called before the first frame update
@@ -64,12 +66,14 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        _audioSource.Play();
-
-        if (Time.time > _canFire)
+        if (!isPauseGame)
         {
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
-            _canFire = Time.time + _fireRate;
+            if (Time.time > _canFire)
+            {
+                _audioSource.Play();
+                Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
+                _canFire = Time.time + _fireRate;
+            }
         }
     }
 }
