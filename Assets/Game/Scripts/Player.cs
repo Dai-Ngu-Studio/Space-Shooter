@@ -5,8 +5,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private GameObject _laserPrefab;
+
     [SerializeField]
     private GameObject _tripleShootPrefab;
+
     [SerializeField]
     private float speed = 5.0f;
 
@@ -17,8 +19,9 @@ public class Player : MonoBehaviour
 
     public bool isPauseGame = false;
 
+    public bool canTripleShot = false;
+
     private AudioSource _audioSource;
-    public bool canTripleShoot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -73,11 +76,9 @@ public class Player : MonoBehaviour
             if (Time.time > _canFire)
             {
                 _audioSource.Play();
-                if (canTripleShoot)
+                if (canTripleShot)
                 {
                     Instantiate(_tripleShootPrefab, transform.position, Quaternion.identity);
-                    
-
                 }
                 else
                 {
@@ -85,7 +86,18 @@ public class Player : MonoBehaviour
                 }
                 _canFire = Time.time + _fireRate;
             }
-
         }
+    }
+
+    public void TripleShotPowerUpOn()
+    {
+        canTripleShot = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+
+    public IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        canTripleShot = false;
     }
 }
