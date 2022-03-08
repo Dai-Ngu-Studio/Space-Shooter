@@ -242,6 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 3696667789789346899, guid: f975112ac90a950238356466c846ba33, type: 3}
+  _tripleShootPrefab: {fileID: 2267161486733132341, guid: 46084b0a9d6eeaf4cb88790317560efb, type: 3}
   speed: 5
   _fireRate: 0.25
   isPauseGame: 0
+  canTripleShoot: 0

@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private GameObject _laserPrefab;
-
-    [SerializeField] 
+    [SerializeField]
+    private GameObject _tripleShootPrefab;
+    [SerializeField]
     private float speed = 5.0f;
 
-    [SerializeField] 
+    [SerializeField]
     private float _fireRate = 0.25f;
 
     private float _canFire = 0.0f;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     public bool isPauseGame = false;
 
     private AudioSource _audioSource;
+    public bool canTripleShoot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +73,19 @@ public class Player : MonoBehaviour
             if (Time.time > _canFire)
             {
                 _audioSource.Play();
-                Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
+                if (canTripleShoot)
+                {
+                    Instantiate(_tripleShootPrefab, transform.position, Quaternion.identity);
+                    
+
+                }
+                else
+                {
+                    Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
+                }
                 _canFire = Time.time + _fireRate;
             }
+
         }
     }
 }
