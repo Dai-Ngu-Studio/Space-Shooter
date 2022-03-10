@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private GameObject _tripleShootPrefab;
 
     [SerializeField]
+    private GameObject _explosionPrefab;
+
+    [SerializeField]
     private float speed = 5.0f;
 
     [SerializeField]
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour
     public bool canTripleShot = false;
 
     public bool isSpeedBoost = false;
+
+    public int lives = 3;
 
     private AudioSource _audioSource;
 
@@ -97,6 +102,16 @@ public class Player : MonoBehaviour
                 }
                 _canFire = Time.time + _fireRate;
             }
+        }
+    }
+
+    public void Damage()
+    {
+        lives--;
+        if (lives < 1)
+        {
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 
