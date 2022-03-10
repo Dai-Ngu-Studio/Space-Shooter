@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     private GameObject _explosionPrefab;
 
     [SerializeField]
+    private GameObject _shieldGameObject;
+
+    [SerializeField]
     private float speed = 5.0f;
 
     [SerializeField]
@@ -25,6 +28,8 @@ public class Player : MonoBehaviour
     public bool canTripleShot = false;
 
     public bool isSpeedBoost = false;
+
+    public bool isShieldActive = false;
 
     public int lives = 3;
 
@@ -107,6 +112,12 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (isShieldActive)
+        {
+            isShieldActive = false;
+            _shieldGameObject.SetActive(false);
+            return;
+        }
         lives--;
         if (lives < 1)
         {
@@ -137,5 +148,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         isSpeedBoost = false;
+    }
+
+    public void ShieldPowerUpOn()
+    {
+        isShieldActive = true;
+        _shieldGameObject.SetActive(true);
     }
 }
