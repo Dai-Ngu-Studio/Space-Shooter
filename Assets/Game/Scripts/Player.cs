@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     public bool canTripleShot = false;
 
+    public bool isSpeedBoost = false;
+
     private AudioSource _audioSource;
 
     // Start is called before the first frame update
@@ -47,8 +49,17 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
-        transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
+        if (isSpeedBoost)
+        {
+            transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime * 1.5f);
+            transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime * 1.5f);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
+            transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
+        }
+
 
         if (transform.position.y > 0)
         {
@@ -99,5 +110,17 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         canTripleShot = false;
+    }
+
+    public void SpeedBoostPowerUpOn()
+    {
+        isSpeedBoost = true;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+
+    public IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        isSpeedBoost = false;
     }
 }
