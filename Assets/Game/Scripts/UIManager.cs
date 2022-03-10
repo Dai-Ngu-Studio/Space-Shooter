@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int currentLive)
     {
-        Debug.Log(currentLive);
         livesImageDisplay.sprite = lives[currentLive];
     }
 

@@ -5,6 +5,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private GameObject _laserPrefab;
+   
+    private SpawnManager _spawnManager;
+
+    private UIManager _uiMananger;
+
+    private GameManager _gameManager;
 
     [SerializeField]
     private GameObject _tripleShootPrefab;
@@ -41,6 +47,17 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, -4.2f, 0);
 
         _audioSource = GetComponent<AudioSource>();
+        _uiMananger = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if(_uiMananger != null)
+        {
+            _uiMananger.UpdateLives(lives);
+        }
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if(_spawnManager != null)
+        {
+            _spawnManager.StartSpawnRoutine();
+        }
     }
 
     // Update is called once per frame
@@ -118,12 +135,15 @@ public class Player : MonoBehaviour
             _shieldGameObject.SetActive(false);
             return;
         }
-        lives--;
+        _uiMananger.UpdateLives(--lives);
         if (lives < 1)
         {
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
+            _gameManager.gameOver = true;
+            _uiMananger.ShowTitleScreen();
         }
+        
     }
 
     public void TripleShotPowerUpOn()
