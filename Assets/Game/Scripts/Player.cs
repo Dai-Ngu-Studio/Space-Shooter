@@ -5,12 +5,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private GameObject _laserPrefab;
-   
-    private SpawnManager _spawnManager;
-
-    private UIManager _uiMananger;
-
-    private GameManager _gameManager;
 
     [SerializeField]
     private GameObject _tripleShootPrefab;
@@ -20,6 +14,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _shieldGameObject;
+
+    [SerializeField]
+    private GameObject[] _engines;
 
     [SerializeField]
     private float speed = 5.0f;
@@ -39,6 +36,14 @@ public class Player : MonoBehaviour
 
     public int lives = 3;
 
+    private int hitCount = 0;
+
+    private SpawnManager _spawnManager;
+
+    private UIManager _uiMananger;
+
+    private GameManager _gameManager;
+
     private AudioSource _audioSource;
 
     // Start is called before the first frame update
@@ -47,17 +52,24 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, -4.2f, 0);
 
         _audioSource = GetComponent<AudioSource>();
+
         _uiMananger = GameObject.Find("Canvas").GetComponent<UIManager>();
+
         if(_uiMananger != null)
         {
             _uiMananger.UpdateLives(lives);
         }
+
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
         if(_spawnManager != null)
         {
             _spawnManager.StartSpawnRoutine();
         }
+
+        hitCount = 0;
     }
 
     // Update is called once per frame
@@ -135,13 +147,26 @@ public class Player : MonoBehaviour
             _shieldGameObject.SetActive(false);
             return;
         }
+
         _uiMananger.UpdateLives(--lives);
+
+        hitCount++;
+
+        if (hitCount == 1)
+        {
+            _engines[0].SetActive(true);
+        }
+        else if (hitCount == 2)
+        {
+            _engines[1].SetActive(true);
+        }
+
         if (lives < 1)
         {
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
             _gameManager.gameOver = true;
             _uiMananger.ShowTitleScreen();
+            Destroy(this.gameObject);
         }
         
     }
