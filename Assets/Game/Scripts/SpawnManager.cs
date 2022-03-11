@@ -15,8 +15,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-       
-        
     }
 
     IEnumerator EnemySpawnRoutine()
@@ -32,10 +30,9 @@ public class SpawnManager : MonoBehaviour
     {
         while (_gameManager.gameOver == false)
         {   
-
             int randomPowerUp = Random.Range(0, powerups.Length);
             Instantiate(powerups[randomPowerUp], new Vector3(Random.Range(-7f, 7f), 7, 0), Quaternion.identity);
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(10);
         }
     }
     public void StartSpawnRoutine()

@@ -9,10 +9,4 @@ public class ExplosionEffect : MonoBehaviour
     {
         Destroy(this.gameObject, 4.0f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
