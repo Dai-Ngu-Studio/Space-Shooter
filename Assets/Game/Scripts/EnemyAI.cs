@@ -12,11 +12,14 @@ public class EnemyAI : MonoBehaviour
 
     private UIManager _uiMananger;
 
+    private GameManager _gameManager;
+
     private float _speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
         _uiMananger = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,11 @@ public class EnemyAI : MonoBehaviour
         {
             float randomX = Random.Range(-7, 7);
             transform.position = new Vector3(randomX, 7, 0);
+        }
+
+        if (_gameManager.gameOver)
+        {
+            Destroy(this.gameObject);
         }
     }
 
