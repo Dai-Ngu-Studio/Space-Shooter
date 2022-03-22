@@ -9,17 +9,17 @@ public class PauseMenu : MonoBehaviour
     private GameObject _pauseUI;
 
     private Player _player;
-    private GameManager _gameManager;
+    private GameManager _playManagerment;
 
     // Start is called before the first frame update
     void Start()
     {
         _pauseUI = transform.GetChild(0).gameObject;
 
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
-        if (!_gameManager.gameOver)
+        if (!_playManagerment.gameEnd)
         {
             _player = GameObject.Find("Player").GetComponent<Player>();
         }
@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_gameManager != null)
+        if (_playManagerment != null)
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.isPauseGame = true;
+            _player.isGameStopped = true;
         }
         _gameUI.SetActive(false);
         _pauseUI.SetActive(true);
@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.isPauseGame = false;
+            _player.isGameStopped = false;
         }
         _gameUI.SetActive(true);
         _pauseUI.SetActive(false);

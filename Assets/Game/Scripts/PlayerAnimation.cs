@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private Animator _anim;
+    private Animator _animmationManagement;
 
     // Start is called before the first frame update
     void Start()
     {
-        _anim = GetComponent<Animator>();
+        _animmationManagement = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -15,20 +15,20 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            _anim.SetBool("Turn_Left", true);
-            _anim.SetBool("Turn_Right", false);
+            _animmationManagement.SetBool("Turn_Left", true);
+            _animmationManagement.SetBool("Turn_Right", false);
         }
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
         {
-            _anim.SetBool("Turn_Left", false);
-            _anim.SetBool("Turn_Right", false);
+            _animmationManagement.SetBool("Turn_Left", false);
+            _animmationManagement.SetBool("Turn_Right", false);
         }
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            _anim.SetBool("Turn_Left", false);
-            _anim.SetBool("Turn_Right", true);
+            _animmationManagement.SetBool("Turn_Left", false);
+            _animmationManagement.SetBool("Turn_Right", true);
         }
     }
 }

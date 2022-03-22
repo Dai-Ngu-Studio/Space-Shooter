@@ -26,9 +26,9 @@ public class Player : MonoBehaviour
 
     private float _canFire = 0.0f;
 
-    public bool isPauseGame = false;
+    public bool isGameStopped = false;
 
-    public bool canTripleShot = false;
+    public bool canTripleFireShot = false;
 
     public bool isSpeedBoost = false;
 
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     private UIManager _uiMananger;
 
-    private GameManager _gameManager;
+    private GameManager _playManagerment;
 
     private AudioSource _audioSource;
 
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             _uiMananger.UpdateLives(lives);
         }
 
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
@@ -121,12 +121,12 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        if (!isPauseGame)
+        if (!isGameStopped)
         {
             if (Time.time > _canFire)
             {
                 _audioSource.Play();
-                if (canTripleShot)
+                if (canTripleFireShot)
                 {
                     Instantiate(_tripleShootPrefab, transform.position, Quaternion.identity);
                 }
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
         if (lives < 1)
         {
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            _gameManager.gameOver = true;
+            _playManagerment.gameEnd = true;
             _uiMananger.ShowTitleScreen();
             Destroy(this.gameObject);
         }
@@ -173,14 +173,14 @@ public class Player : MonoBehaviour
 
     public void TripleShotPowerUpOn()
     {
-        canTripleShot = true;
+        canTripleFireShot = true;
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
     public IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
-        canTripleShot = false;
+        canTripleFireShot = false;
     }
 
     public void SpeedBoostPowerUpOn()

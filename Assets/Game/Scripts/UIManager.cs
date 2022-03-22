@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
     public Sprite[] lives;
     public Image livesImageDisplay;
     public Text scoreText;
-    public int score;
+    public int curScore;
     public GameObject titleScreen;
 
     public void UpdateLives(int currentLive)
@@ -16,9 +16,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore()
     {
-        score += 10;
+        curScore += 10;
 
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + curScore;
     }
 
     public void ShowTitleScreen()

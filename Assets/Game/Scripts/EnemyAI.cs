@@ -5,21 +5,21 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyExplosionPrefab;
+    private GameObject _enemyExplosionPrefab; //can not chang
 
     [SerializeField]
-    private AudioClip _audioClip;
+    private AudioClip _audioClip;//can not change
 
-    private UIManager _uiMananger;
+    private UIManager _screenManagermentment;
 
-    private GameManager _gameManager;
+    private GameManager _gameManagerment;
 
     private float _speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        _uiMananger = GameObject.Find("Canvas").GetComponent<UIManager>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _screenManagermentment = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             transform.position = new Vector3(randomX, 7, 0);
         }
 
-        if (_gameManager.gameOver)
+        if (_gameManagerment.gameEnd)
         {
             Destroy(this.gameObject);
         }
@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position, 1f);
             Destroy(this.gameObject);
-            _uiMananger.UpdateScore();
+            _screenManagermentment.UpdateScore();
         }
         else if (other.tag == "Player")
         {
