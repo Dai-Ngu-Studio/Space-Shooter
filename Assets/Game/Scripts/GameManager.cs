@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
