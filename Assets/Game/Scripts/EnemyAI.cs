@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyExplosionPrefab; //can not chang
+    private GameObject _enemyExplosionPrefab; 
 
     [SerializeField]
-    private AudioClip _audioClip;//can not change
+    private AudioClip _audioClip;
 
     private UIManager _screenManagermentment;
 
