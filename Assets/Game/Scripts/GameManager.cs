@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool gameEnd = true;
+    public bool TroChoiKetThuc = true;
 
     public GameObject player;
 
@@ -11,17 +11,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        _screenManagerment = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _screenManagerment = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
     }
 
     private void Update()
     {
-        if (gameEnd)
+        if (TroChoiKetThuc)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Instantiate(player, new Vector3(0, -4.2f, 0), Quaternion.identity);
-                gameEnd = false;
+                TroChoiKetThuc = false;
                 _screenManagerment.HideTitleScreen();
             }
         }
