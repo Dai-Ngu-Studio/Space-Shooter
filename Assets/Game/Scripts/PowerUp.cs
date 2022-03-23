@@ -34,15 +34,15 @@ public class PowerUp : MonoBehaviour
             {
                 if (powerUpId == 0)
                 {
-                    player.TripleShotPowerUpOn();
+                    player.AnBan3tia();
                 }
                 else if (powerUpId == 1)
                 {
-                    player.SpeedBoostPowerUpOn();
+                    player.AnChayNhanh();
                 }
                 else if (powerUpId == 2)
                 {
-                    player.ShieldPowerUpOn();
+                    player.AnGiap();
                 }
             }
             Destroy(this.gameObject);

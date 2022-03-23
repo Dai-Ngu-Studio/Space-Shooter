@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _screenManagermentment = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _screenManagermentment = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
         _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             transform.position = new Vector3(randomX, 7, 0);
         }
 
-        if (_gameManagerment.gameEnd)
+        if (_gameManagerment.TroChoiKetThuc)
         {
             Destroy(this.gameObject);
         }

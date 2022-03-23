@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
         _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
-        if (!_playManagerment.gameEnd)
+        if (!_playManagerment.TroChoiKetThuc)
         {
             _player = GameObject.Find("Player").GetComponent<Player>();
         }
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.isGameStopped = true;
+            _player._DaDung = true;
         }
         _gameUI.SetActive(false);
         _pauseUI.SetActive(true);
@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.isGameStopped = false;
+            _player._DaDung = false;
         }
         _gameUI.SetActive(true);
         _pauseUI.SetActive(false);
