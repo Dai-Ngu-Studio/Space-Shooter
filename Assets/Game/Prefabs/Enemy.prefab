@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyExplosionPrefab: {fileID: 7034466710868766216, guid: 2853064f97f29a546bf19a92b245b7cf, type: 3}
-  _audioClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  AmTHanhEnemy: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!1001 &2855433949005697298
 PrefabInstance:
   m_ObjectHideFlags: 0

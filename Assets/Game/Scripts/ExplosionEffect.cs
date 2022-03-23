@@ -7,6 +7,6 @@ public class ExplosionEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, 4.0f);
+        Destroy(this.gameObject, 4.001f);
     }
 }

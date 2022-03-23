@@ -3,7 +3,9 @@ guid: 83484d8813ff1cb46a777743c4e4c98d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _enemyExplosionPrefab: {instanceID: 0}
+  - AmTHanhEnemy: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

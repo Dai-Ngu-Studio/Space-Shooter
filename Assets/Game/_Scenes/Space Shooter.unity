@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TroChoiKetThuc: 1
-  NguoiChoi: {fileID: 0}
+  nguoiChooi: {fileID: 6439501208228661527, guid: 746329384ba553e4da6f0b5f44a80314, type: 3}
 --- !u!4 &48116027
 Transform:
   m_ObjectHideFlags: 0
@@ -1767,8 +1767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9739638a4524aec4895e647e7ca95f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameUI: {fileID: 1655999774}
-  _pauseUI: {fileID: 293054138}
+  GiaoDien: {fileID: 1655999774}
+  TamNgunGUI: {fileID: 293054138}
 --- !u!4 &1412232048
 Transform:
   m_ObjectHideFlags: 0

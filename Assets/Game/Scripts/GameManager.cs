@@ -4,14 +4,14 @@ public class GameManager : MonoBehaviour
 {
     public bool TroChoiKetThuc = true;
 
-    public GameObject player;
+    public GameObject nguoiChooi;
 
-    private UIManager _screenManagerment;
+    private UIManager a;
 
     private void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        _screenManagerment = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
+        a = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
     }
 
     private void Update()
@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Instantiate(player, new Vector3(0, -4.2f, 0), Quaternion.identity);
+                Instantiate(nguoiChooi, new Vector3(0.01f, -4.2f, 0), Quaternion.identity);
                 TroChoiKetThuc = false;
-                _screenManagerment.HideTitleScreen();
+                a.AnManHinhTitle();
             }
         }
     }

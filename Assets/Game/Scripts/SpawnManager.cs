@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
         _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    IEnumerator PowerSpawnRangeTime()
+    IEnumerator test()
     {
         while (_playManagerment.TroChoiKetThuc == false)
         {
@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawnRoutine()
     {
-        StartCoroutine(PowerSpawnRangeTime());
+        StartCoroutine(test());
         StartCoroutine(PowerUpsOnRangeTime());
     }
 }

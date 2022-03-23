@@ -3,25 +3,25 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _gameUI;
+    private GameObject GiaoDien;
 
     [SerializeField]
-    private GameObject _pauseUI;
+    private GameObject TamNgunGUI;
 
-    private Player _player;
+    private Player nguoiChoi;
     private GameManager _playManagerment;
 
     // Start is called before the first frame update
     void Start()
     {
-        _pauseUI = transform.GetChild(0).gameObject;
+        TamNgunGUI = transform.GetChild(0).gameObject;
 
         _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
         if (!_playManagerment.TroChoiKetThuc)
         {
-            _player = GameObject.Find("Player").GetComponent<Player>();
+            nguoiChoi = GameObject.Find("Player").GetComponent<Player>();
         }
     }
 
@@ -39,23 +39,23 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        if (_player != null)
+        if (nguoiChoi != null)
         {
-            _player._DaDung = true;
+            nguoiChoi._DaDung = true;
         }
-        _gameUI.SetActive(false);
-        _pauseUI.SetActive(true);
+        GiaoDien.SetActive(false);
+        TamNgunGUI.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
-        if (_player != null)
+        if (nguoiChoi != null)
         {
-            _player._DaDung = false;
+            nguoiChoi._DaDung = false;
         }
-        _gameUI.SetActive(true);
-        _pauseUI.SetActive(false);
+        GiaoDien.SetActive(true);
+        TamNgunGUI.SetActive(false);
         Time.timeScale = 1;
     }
 

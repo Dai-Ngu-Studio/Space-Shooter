@@ -8,18 +8,18 @@ public class EnemyAI : MonoBehaviour
     private GameObject _enemyExplosionPrefab; 
 
     [SerializeField]
-    private AudioClip _audioClip;
+    private AudioClip AmTHanhEnemy;
 
-    private UIManager _screenManagermentment;
+    private UIManager QuanLyUI;
 
-    private GameManager _gameManagerment;
+    private GameManager abc;
 
     private float _speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        _screenManagermentment = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
-        _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
+        QuanLyUI = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
+        abc = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             transform.position = new Vector3(randomX, 7, 0);
         }
 
-        if (_gameManagerment.TroChoiKetThuc)
+        if (abc.TroChoiKetThuc)
         {
             Destroy(this.gameObject);
         }
@@ -49,9 +49,9 @@ public class EnemyAI : MonoBehaviour
             }
             Destroy(other.gameObject);
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position, 1f);
+            AudioSource.PlayClipAtPoint(AmTHanhEnemy, Camera.main.transform.position, 1f);
             Destroy(this.gameObject);
-            _screenManagermentment.UpdateScore();
+            QuanLyUI.UpdateScore();
         }
         else if (other.tag == "Player")
         {
@@ -62,7 +62,7 @@ public class EnemyAI : MonoBehaviour
                 player.Damage();
             }
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position, 1f);
+            AudioSource.PlayClipAtPoint(AmTHanhEnemy, Camera.main.transform.position, 1f);
             Destroy(this.gameObject);
         }
     }
