@@ -19,48 +19,48 @@ public class Player : MonoBehaviour
     private GameObject[] _engines;
 
     [SerializeField]
-    private float speed = 5.0f;
+    private float VanDoc = 5.0f;
 
     [SerializeField]
     private float _fireRate = 0.25f;
 
-    private float _canFire = 0.0f;
+    private float CoTheBan = 0.0f;
 
-    public bool isGameStopped = false;
+    public bool _DaDung = false;
 
-    public bool canTripleFireShot = false;
+    public bool Ban3tia = false;
 
-    public bool isSpeedBoost = false;
+    public bool chayNhanh = false;
 
-    public bool isShieldActive = false;
+    public bool DangCoGiap = false;
 
-    public int lives = 3;
+    public int Mang = 3;
 
-    private int hitCount = 0;
+    private int total_hit_amount = 0;
 
     private SpawnManager _spawnManager;
 
-    private UIManager _uiMananger;
+    private UIManager QuanLyUI;
 
-    private GameManager _playManagerment;
+    private GameManager gameManagement;
 
-    private AudioSource _audioSource;
+    private AudioSource AmThanh;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, -4.2f, 0);
+        transform.position = new Vector3(0.09f, -4.2f, 0);
 
-        _audioSource = GetComponent<AudioSource>();
+        AmThanh = GetComponent<AudioSource>();
 
-        _uiMananger = GameObject.Find("Canvas").GetComponent<UIManager>();
+        QuanLyUI = GameObject.Find("HinhNenMenu").GetComponent<UIManager>();
 
-        if(_uiMananger != null)
+        if(QuanLyUI != null)
         {
-            _uiMananger.UpdateLives(lives);
+            QuanLyUI.UpdateLives(Mang);
         }
 
-        _playManagerment = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManagement = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
@@ -69,34 +69,34 @@ public class Player : MonoBehaviour
             _spawnManager.StartSpawnRoutine();
         }
 
-        hitCount = 0;
+        total_hit_amount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        ChayDiChuyen();
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
         {
-            Shoot();
+            Ban();
         }
     }
 
-    private void Movement()
+    private void ChayDiChuyen()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (isSpeedBoost)
+        if (chayNhanh)
         {
-            transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime * 1.5f);
-            transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime * 1.5f);
+            transform.Translate(Vector3.right * VanDoc * horizontalInput * Time.deltaTime * 1.5f);
+            transform.Translate(Vector3.up * VanDoc * verticalInput * Time.deltaTime * 1.5f);
         }
         else
         {
-            transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
-            transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
+            transform.Translate(Vector3.right * VanDoc * horizontalInput * Time.deltaTime);
+            transform.Translate(Vector3.up * VanDoc * verticalInput * Time.deltaTime);
         }
 
 
@@ -119,14 +119,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    private void Ban()
     {
-        if (!isGameStopped)
+        if (!_DaDung)
         {
-            if (Time.time > _canFire)
+            if (Time.time > CoTheBan)
             {
-                _audioSource.Play();
-                if (canTripleFireShot)
+                AmThanh.Play();
+                if (Ban3tia)
                 {
                     Instantiate(_tripleShootPrefab, transform.position, Quaternion.identity);
                 }
@@ -134,70 +134,70 @@ public class Player : MonoBehaviour
                 {
                     Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
                 }
-                _canFire = Time.time + _fireRate;
+                CoTheBan = Time.time + _fireRate;
             }
         }
     }
 
     public void Damage()
     {
-        if (isShieldActive)
+        if (DangCoGiap)
         {
-            isShieldActive = false;
+            DangCoGiap = false;
             _shieldGameObject.SetActive(false);
             return;
         }
 
-        _uiMananger.UpdateLives(--lives);
+        QuanLyUI.UpdateLives(--Mang);
 
-        hitCount++;
+        total_hit_amount++;
 
-        if (hitCount == 1)
+        if (total_hit_amount == 1)
         {
             _engines[0].SetActive(true);
         }
-        else if (hitCount == 2)
+        else if (total_hit_amount == 2)
         {
             _engines[1].SetActive(true);
         }
 
-        if (lives < 1)
+        if (Mang < 1)
         {
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            _playManagerment.gameEnd = true;
-            _uiMananger.ShowTitleScreen();
+            gameManagement.TroChoiKetThuc = true;
+            QuanLyUI.ShowTitleScreen();
             Destroy(this.gameObject);
         }
         
     }
 
-    public void TripleShotPowerUpOn()
+    public void AnBan3tia()
     {
-        canTripleFireShot = true;
-        StartCoroutine(TripleShotPowerDownRoutine());
+        Ban3tia = true;
+        StartCoroutine(HetBan3Tia());
     }
 
-    public IEnumerator TripleShotPowerDownRoutine()
+    public IEnumerator HetBan3Tia()
     {
         yield return new WaitForSeconds(5);
-        canTripleFireShot = false;
+        Ban3tia = false;
     }
 
-    public void SpeedBoostPowerUpOn()
+    public void AnChayNhanh()
     {
-        isSpeedBoost = true;
+        chayNhanh = true;
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
 
     public IEnumerator SpeedBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
-        isSpeedBoost = false;
+        chayNhanh = false;
     }
 
-    public void ShieldPowerUpOn()
+    public void AnGiap()
     {
-        isShieldActive = true;
+        DangCoGiap = true;
         _shieldGameObject.SetActive(true);
     }
 }
