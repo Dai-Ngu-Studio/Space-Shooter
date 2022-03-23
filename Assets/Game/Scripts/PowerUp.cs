@@ -3,18 +3,18 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.0f;
+    private float VanTocPowerup = 3.0f;
 
     [SerializeField]
-    private int powerUpId; // 0: TripleShot; 1: Speed; 2: Shield
+    private int IdTangSucManh; // 0: TripleShot; 1: Speed; 2: Shield
 
     [SerializeField]
-    private AudioClip _audioClip; //sound when player pick it
+    private AudioClip TiengPowerUp; //sound when player pick it
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        transform.Translate(Vector3.down * VanTocPowerup * Time.deltaTime);
 
         if (transform.position.y < -7)
         {
@@ -26,23 +26,23 @@ public class PowerUp : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Player player = other.GetComponent<Player>();
+            Player NguoiChoi = other.GetComponent<Player>();
 
-            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position, 1f);
+            AudioSource.PlayClipAtPoint(TiengPowerUp, Camera.main.transform.position, 1f);
 
-            if (player != null)
+            if (NguoiChoi != null)
             {
-                if (powerUpId == 0)
+                if (IdTangSucManh == 0)
                 {
-                    player.AnBan3tia();
+                    NguoiChoi.AnBan3tia();
                 }
-                else if (powerUpId == 1)
+                else if (IdTangSucManh == 1)
                 {
-                    player.AnChayNhanh();
+                    NguoiChoi.AnChayNhanh();
                 }
-                else if (powerUpId == 2)
+                else if (IdTangSucManh == 2)
                 {
-                    player.AnGiap();
+                    NguoiChoi.AnGiap();
                 }
             }
             Destroy(this.gameObject);
