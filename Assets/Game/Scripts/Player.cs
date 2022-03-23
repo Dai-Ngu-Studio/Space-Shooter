@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private int total_hit_amount = 0;
+
+    private SpawnManager _spawnManager;
+
+    private UIManager QuanLyUI;
+
+    private GameManager gameManagement;
+
+    private AudioSource AmThanh;
     [SerializeField]
     private GameObject _laserPrefab;
 
@@ -36,15 +45,38 @@ public class Player : MonoBehaviour
 
     public int Mang = 3;
 
-    private int total_hit_amount = 0;
 
-    private SpawnManager _spawnManager;
+    public void Damage()
+    {
+        if (DangCoGiap)
+        {
+            DangCoGiap = false;
+            _shieldGameObject.SetActive(false);
+            return;
+        }
 
-    private UIManager QuanLyUI;
+        QuanLyUI.UpdateLives(--Mang);
 
-    private GameManager gameManagement;
+        total_hit_amount++;
 
-    private AudioSource AmThanh;
+        if (total_hit_amount == 1)
+        {
+            _engines[0].SetActive(true);
+        }
+        else if (total_hit_amount == 2)
+        {
+            _engines[1].SetActive(true);
+        }
+
+        if (Mang < 1)
+        {
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            gameManagement.TroChoiKetThuc = true;
+            QuanLyUI.ShowTitleScreen();
+            Destroy(this.gameObject);
+        }
+        
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,15 +105,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        ChayDiChuyen();
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
-        {
-            Ban();
-        }
-    }
 
     private void ChayDiChuyen()
     {
@@ -138,39 +162,16 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    public void Damage()
+    void Update()
     {
-        if (DangCoGiap)
-        {
-            DangCoGiap = false;
-            _shieldGameObject.SetActive(false);
-            return;
-        }
+        ChayDiChuyen();
 
-        QuanLyUI.UpdateLives(--Mang);
-
-        total_hit_amount++;
-
-        if (total_hit_amount == 1)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
         {
-            _engines[0].SetActive(true);
+            Ban();
         }
-        else if (total_hit_amount == 2)
-        {
-            _engines[1].SetActive(true);
-        }
-
-        if (Mang < 1)
-        {
-            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            gameManagement.TroChoiKetThuc = true;
-            QuanLyUI.ShowTitleScreen();
-            Destroy(this.gameObject);
-        }
-        
     }
-
+    
     public void AnBan3tia()
     {
         Ban3tia = true;
