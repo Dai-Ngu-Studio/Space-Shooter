@@ -285,8 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c2cb57d3891ff469d3415371c77db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: 1
-  player: {fileID: 6439501208228661527, guid: 746329384ba553e4da6f0b5f44a80314, type: 3}
+  TroChoiKetThuc: 1
+  NguoiChoi: {fileID: 0}
 --- !u!4 &48116027
 Transform:
   m_ObjectHideFlags: 0
@@ -2114,7 +2114,7 @@ GameObject:
   - component: {fileID: 1655999776}
   - component: {fileID: 1655999775}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HinhNenMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2139,7 +2139,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
   livesImageDisplay: {fileID: 1201356020}
   scoreText: {fileID: 1128837925}
-  score: 0
+  curScore: 0
   titleScreen: {fileID: 574421161}
 --- !u!114 &1655999776
 MonoBehaviour:
