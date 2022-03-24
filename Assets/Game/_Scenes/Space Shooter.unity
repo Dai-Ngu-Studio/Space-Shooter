@@ -1418,7 +1418,7 @@ GameObject:
   - component: {fileID: 1186467188}
   - component: {fileID: 1186467187}
   m_Layer: 0
-  m_Name: Galaxy Background
+  m_Name: HinhNenVuTru
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1588,7 +1588,7 @@ GameObject:
   - component: {fileID: 1278289986}
   - component: {fileID: 1278289987}
   m_Layer: 0
-  m_Name: SpaceBG_Overlay
+  m_Name: HinhNenVuTru_Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
